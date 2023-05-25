@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- v-model을 통해서 입력된 후 -->
+    <!-- 여기서 view에서 보여짐, 새로 고침 없이 바로 화면에 출력됨 -->
+    <!-- {{}} 안에는 변수명이 들어가는데 data 객체의 속성 값 message가 {{}}를 통해서 message 변수에 접근 가능 -->
+    <p id="name">name : {{ message }}</p>
+    <!-- 메서드 안에 있는 함수 출력 -->
+    <p>{{ print() }}</p>
+    <input type="text" v-model="message">
+    <!-- v-model은 <input> 태그에 쓰이고 <input> 태그가 나오면 무조건 v-model을 사용 -->
+    <p>{{ greething() }}</p>
+  </div>
+
+  <!-- Vue CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    // 1. vue 객체 생성 (new를 써주는 이유는 vue가 제공하는 객체의 '생성자 함수'선언 -> 즉, vue instance 생성)
+    const app = new Vue({ 
+
+      // 2. element에 view(dom)의 id를 적어줌으로써 id가 "app"인 DOM과 연결함(<div id="app">)
+      el : '#app', 
+
+      // 3. data는 vue 인스턴스가 사용할 정보를 가지고 있는 속성
+      data : {
+        message : '', // vue 인스턴스와 연결되어 있는 앱에 적용시킬 data 객체를 추가해 준 것
+      },            // message에 들어갈 값이 
+
+      // methods는 vue 인스턴스가 사용할 함수를 저장하고 있는 속성
+      // methods 안에는 arrow function 사용하면 안 됨
+      methods : {
+        print : function() {
+          console.log(this.message)
+        },
+
+        greeting() {
+          this.message = 'cute boy'
+        }
+      },
+
+    })
+    // el, data, methods는 디폴트 -> 이름 바꾸지 않고 그대로 써야함
+  </script>
+</body>
+</html>

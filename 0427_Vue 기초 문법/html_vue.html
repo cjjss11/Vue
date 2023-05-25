@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p id="name">name : {{ message }} </p>
+    <input id="inputName" type="text" v-model="message"> 
+    <!-- v-model은 input 태그와 vue 안에 있는 data 변수와 연결 시켜주는 것 -->
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({ // vue 객체 생성, {}는 옵션 생성
+      el : '#app',
+      data : {
+        message :'',
+      }
+    }) 
+
+
+  </script>
+</body>
+</html>
