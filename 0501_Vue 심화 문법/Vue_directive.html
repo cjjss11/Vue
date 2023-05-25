@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- v-model <input>  -->
+  <div id="app">
+    <p id="name">name: {{ message }}</p>
+    <input type="text" v-model="message">
+  </div>
+
+  <!-- v-model <checkbox> -->
+  <div id="app2">
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+  </div>
+
+  <hr>
+  <br>
+
+  <!-- v-on click -->
+  <div id="app3">
+    <div>{{ text }}</div>
+    <button v-on:click="changeText">클릭하면 글자가 변해!</button>
+    <!-- <button @click="changeText">클릭하면 글자가 변해</button> -->
+  </div>
+
+  <br>
+   
+  <!-- v-on keyup -->
+  <div id="app4">
+    <input type="text" @keyup="gogo">
+  </div>
+
+  <hr>
+
+  <!-- v-bind  -->
+  <div id="app5">
+    <div>
+      <a v-bind:href="URL">어디로 갈까요?</a>
+    </div>
+    <button v-on:click="setURLtoNaver">NAVER</button>
+    <button v-on:click="setURLtoGoogle">GOOGLE</button>
+  </div>
+
+  <hr>
+
+  <!-- v-for1 -->
+  <div id="app6">
+    <ul>
+      <li v-for="(menu, idx) in menus" :key="idx">{{ menu }}</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- v-for2 -->
+  <div id="app7">
+    <ul>
+      <li v-for="menu in menus" :key="menu.id">{{ menu.name }}</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- v-for3 -->
+  <div id="app8">
+    <p v-for="(a,b,c) in hobbys">
+      {{ a }} - {{ b }} - {{ c }}
+    </p>
+  </div>
+
+  <hr>
+
+  <!-- computed (연산 프로퍼티) -->
+  <div id="app9">
+    <!-- data 안에 msg로만 이용한 것 -->
+    <p>{{ msg.split('').reverse().join('') }}</p>
+    <!-- computed 안에 함수를 이용해서 한 것  -->
+    <p>{{ reverseMessage }}</p>
+  </div>
+
+  <hr>
+
+  <!-- watch -->
+  <div id="app10">
+    <span>Value={{ value }}</span> <br>
+    <span>changeValue={{ changeValue }}</span> <br>
+    <button @click="change">변경</button>
+  </div>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    // v-model <input>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '',
+      },
+    })
+
+    // v-model <checkbox>
+    const app2 = new Vue({
+      el: '#app2',
+      data: {
+        checked: false,
+      },
+    })
+
+    // v-on click
+    const app3 = new Vue({
+      el: '#app3',
+      data: {
+        text: '오늘의 주인공은?',
+      },
+      methods: {
+        // changeText : function () {
+        changeText() {
+          this.text = "축하합니다."
+        },
+      },
+    })
+
+    // v-on keyup
+    const app4 = new Vue({
+      el: '#app4',
+      data: {},
+      methods: {
+        gogo(evt) {
+          console.log(evt.target.value)
+        },
+      },
+    })
+
+    // v-bind
+    const app5 = new Vue({
+      el: '#app5',
+      data: {
+        URL: "",
+      },
+      methods: {
+        setURLtoNaver() {
+          this.URL = "https://www.naver.com"
+        },
+        setURLtoGoogle() {
+          this.URL = "https://www.google.com"
+        },
+      },
+    })
+
+    // v-for1
+    const app6 = new Vue({
+      el: '#app6',
+      data: {
+        menus: ['짜장면', '짬뽕', '탕수육'],
+      }
+    })
+
+    // v-for2
+    const app7 = new Vue({
+      el: '#app7',
+      data: {
+        menus: [
+          {
+            id: 1,
+            name: "짜장면",
+          },
+          {
+            id: 2,
+            name: "짬뽕",
+          },
+          {
+            id: 3,
+            name: "탕수육",
+          },
+        ],
+      },
+    })
+
+    // v-for3
+    const app8 = new Vue({
+      el: 'div',
+      data: {
+        hobbys: {
+          hobby1: '레고랑 운동화 모으기',
+          hobby2: '올드카 드라이빙',
+          hobby3: '등산 자전거 낚시',
+        }
+      }
+    })
+
+    // computed (연산 프로퍼티)
+    const app9 = new Vue({
+      el: '#app9',
+      data: {
+        msg: "Text interpolation"
+      },
+      computed: {
+        reverseMessage: function () {
+          return this.msg.split('').reverse().join('');
+        },
+      },
+      methods: {
+        reverseMessage: function () {
+          return this.message.split('').reverse().join('')
+        }
+      }
+    })
+
+    // watch
+    const app10 = new Vue({
+      el: '#app10',
+      data: {
+        value: 0,
+        changeValue: "",
+      },
+      watch: {
+        value() {
+          this.changeValue = this.value;
+        },
+      },
+      methods: {
+        change() {
+          this.value++;
+        },
+      },
+    })
+  </script>
+</body>
+</html>
